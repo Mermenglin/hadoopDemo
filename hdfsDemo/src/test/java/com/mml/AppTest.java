@@ -26,7 +26,9 @@ public class AppTest
 
     @Test
     public void testUpaload() throws IOException {
-        fs.copyFromLocalFile (new Path("e:/test.log"), new Path("/test.log.copy"));
+//        fs.copyFromLocalFile (new Path("e:/test.log"), new Path("/test.log.copy"));
+        fs.copyFromLocalFile (new Path("E:/BaiduNetdiskDownload/hadoop/2015082818"), new Path("/webpv/input/2015082818"));
+        fs.copyFromLocalFile (new Path("E:/BaiduNetdiskDownload/hadoop/2015082819"), new Path("/webpv/input/2015082819"));
         fs.close();
     }
 

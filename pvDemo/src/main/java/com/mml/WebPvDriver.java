@@ -15,7 +15,7 @@ import java.io.IOException;
  * @version 1.0
  * @date 2020-7-21 15:10
  */
-public class WordCountDriver {
+public class WebPvDriver {
 
     /**
      *
@@ -24,10 +24,10 @@ public class WordCountDriver {
      */
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
         // 设置数据的输入路径以及结果的输出路径
-//        args = new String[]{
-//                "hdfs://bd-server1.mml.com:8020/wordcount/input",
-//                "hdfs://bd-server1.mml.com:8020/wordcount/output1"
-//        };
+        args = new String[]{
+                "hdfs://bd-server1.mml.com:8020/webpv/input",
+                "hdfs://bd-server1.mml.com:8020/webpv/output"
+        };
 
         Configuration conf = new Configuration();
         conf.set("fs.defaultFS", "hdfs://bd-server1.mml.com:8020");
@@ -37,25 +37,25 @@ public class WordCountDriver {
         Job job = Job.getInstance(conf);
 
         // 指定启用combiner优化
-        job.setCombinerClass(WordCountReducer.class);
+        job.setCombinerClass(WebPvReducer.class);
 
         // 设定程序的主类，否则yarn找不到这个mapreduce程序
-        job.setJarByClass(WordCountDriver.class);
+        job.setJarByClass(WebPvDriver.class);
 
         // 指定数据的输入路径以及结果的输出路径
         FileInputFormat.addInputPath(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
         // 指定我们自定义的map程序和reduce程序
-        job.setMapperClass(WordCountMapper.class);
-        job.setReducerClass(WordCountReducer.class);
+        job.setMapperClass(WebPvMapper.class);
+        job.setReducerClass(WebPvReducer.class);
 
         // 设置map的输出键值对类型
-        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputKeyClass(IntWritable.class);
         job.setMapOutputValueClass(IntWritable.class);
 
         // 设置Reduce的输出键值对类型
-        job.setOutputKeyClass(Text.class);
+        job.setOutputKeyClass(IntWritable.class);
         job.setOutputValueClass(IntWritable.class);
 
         // 提交job
