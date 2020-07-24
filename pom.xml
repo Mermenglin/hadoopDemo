@@ -12,6 +12,7 @@
         <module>hdfsDemo</module>
         <module>MapReducerDemo1</module>
         <module>pvDemo</module>
+        <module>SecondarySort</module>
     </modules>
 
     <dependencies>
